@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<title>Add Employee</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link type="text/css" rel="stylesheet"
+	th:href="@{css/bootstrap.min.css}" />
+<link type="text/css" rel="stylesheet" href="/css/customFormStyle.css"
+	th:href="@{css/customFormStyle.css}" />
+<script>
+	function validatePwd() {
+
+		if (document.getElementById("password").value != document
+				.getElementById("passwordCheck").value) {
+			document.getElementById("passwordCheck").setCustomValidity(
+					'Re-Entered password does not match');
+		}
+	}
+</script>
+</head>
+<body>
+	
+	<div class="login-page">
+	<div class="form">
+		<form th:object="${signupform}" th:action="@{/saveuser}" action="#"
+			method="post" class="register-form">
+			<h1>Sign-up</h1>
+			<div class="imgcontainer">
+				<img
+					src="https://pngimage.net/wp-content/uploads/2018/06/login-png-images-2.png"
+					alt="Avatar" class="avatar">
+			</div>
+			<input type="text" th:field="*{username}" placeholder="Username"
+				pattern="[A-Za-z]+"
+				title="Only alpahbetic characters allowed in name" required />
+
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<input type="password" th:field="*{password}" id="password"
+				placeholder="Password" minlength=7 maxlength=30
+				title="Minimum length of password should be 7 characters" />
+
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<input type="password" th:field="*{passwordCheck}" id="passwordCheck"
+				placeholder="Re-enter Password" onblur="validatePwd()" required />
+
+
+			<p class="alert alert-danger"
+				th:if="${#fields.hasErrors('passwordCheck')}"
+				th:errors="*{passwordCheck}">Password Match Error</p>
+			<p class="alert alert-danger"
+				th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username
+				Error</p>
+
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<div>
+				<button type="submit" />
+				Save
+			</div>
+		</form>
+	</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add student</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link type="text/css" rel="stylesheet" th:href="@{css/bootstrap.min.css}" />
+	
+		<style type="text/css">
+	
+
+ .login-page {
+  width: 360px;
+  padding: 8% 0 0;
+  margin: auto;
+}
+.form {
+  position: relative;
+  z-index: 1;
+  background: #FFFFFF;
+  max-width: 360px;
+  margin: 0 auto 100px;
+  padding: 45px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+.form input {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+.form button {
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #4CAF50;
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+.form button:hover,.form button:active,.form button:focus {
+  background: #43A047;
+}
+
+.form .register-form {
+
+}
+
+
+span.psw {
+  float: right;
+  padding-top: 16px;
+}
+
+
+body {
+ background: linear-gradient(to left, #2bb72929, #8DC26F);
+  font-family: "Roboto", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;      
+}
+.alert{
+	border:solid red;
+	border-color: red;
+}
+	</style>
+	
+</head>
+<body>
+<div class="login-page">
+  <div class="form">
+	<h1>New Employee</h1>
+	
+		<form th:object="${student}" th:action="@{save}" action="#" method="post" class="register-form">
+			<input type="text" th:field="*{firstName}"
+				placeholder="Firstname(Required)" pattern="[A-Za-z]+" title="Only alpahbetic characters allowed in name" required />
+			<input type="text" th:field="*{lastName}"
+				placeholder="Lastname(Required)"  pattern="[A-Za-z]+" title="Only alpahbetic characters allowed in last name" required />
+			
+			<input type="text" th:field="*{department}" 
+				placeholder="Department(Required)" required title="this field is required"  />
+			
+			<input type="text" th:field="*{email}"
+				placeholder="Email(Required)"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" title="Please give proper format" required />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<button type="submit" value="Save">Save</button>
+		</form>
+	</div>
+</div>
+</body>
+</html>

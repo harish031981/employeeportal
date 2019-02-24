@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" 
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Employee list</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link type="text/css" rel="stylesheet" th:href="@{css/bootstrap.min.css}" />
+ <style>
+ tr:hover
+{
+   background-color:lightgray;
+  
+}
+ </style>
+</head>
+<body style="background:linear-gradient(to left, #2bb72929, #8DC26F);">
+<!--  body background="https://www.publicdomainpictures.net/pictures/70000/nahled/grass-texture-background-green.jpg"> -->
+	
+	<div class="col-md-4" style="padding-top: 30px">
+		<h1 th:inline="text" style="text-shadow: green; color:white;">Welcome [[${#httpServletRequest.remoteUser}]]..!!</h1>
+	</div>
+	
+		<form th:action="@{/logout}" method="post" style="text-align: right;padding-top: 10px;padding-right:10px ">
+			<input  type="submit" value="Sign Out" class="btn btn-danger "/>
+		</form>
+	
+    
+    <div style="width:100%">
+    
+    <table class="table" background="http://paper-backgrounds.com/textureimages/2012/04/gray-wall-textured-background-500x500.jpg" style=" font-size: 18px;width: 100%;" >
+		<tr style="background: darkgreen; color:white;" >
+		    <th style="text-align: center;">Name</th>
+		    <th  style="text-align: center;">Email</th>
+		    <th  style="text-align: center;">Department</th>
+		    <th  style="text-align: center;">Skills</th>
+		    <th  style="text-align: center;">Actions</th>
+		</tr>  
+    	<tr th:each = "student : ${students}" style="border: solid silver;">
+    		<td th:text="${student.firstName} + ' ' + ${student.lastName}"  style="text-align: center;"  ></td>
+    		<td th:text="${student.email}"  style="text-align: center;"></td>
+    		<td th:text="${student.department}" style="text-align: center;"></td>
+    		<td  style="text-align: center;">
+				<span th:each="course,iterStat : ${student.courses}">
+					<span th:text="${course.name}"/><th:block th:if="${!iterStat.last}">,</th:block>
+				</span>    		
+    		</td>
+    		<td  style="text-align: center;">
+    			<a th:href="@{/addEmployeeSkills/{id}(id=${student.id})}" class="btn btn-success">Add Skills</a>
+    			<a th:href="@{/edit/{id}(id=${student.id})}" class="btn btn-primary">Edit</a>
+    			<a sec:authorize="hasAuthority('ADMIN')" th:href="@{/delete/{id}(id=${student.id})}" class="btn btn-danger">Delete</a>
+    		</td>
+    	</tr>
+    </table>
+    <a href="/add" class="btn btn-primary btn-lg" >Add Employee</a>
+	</div>    
+</body>
+</html>
