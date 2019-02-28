@@ -1,57 +1,181 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org" 
+<html xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <title>Employee list</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<link type="text/css" rel="stylesheet" th:href="@{css/bootstrap.min.css}" />
- <style>
- tr:hover
-{
-   background-color:lightgray;
-  
+<title>Employee list</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+	function confirmDelete(name) {
+		alert("Deleting employee :" + name);
+	}
+</script>
+<style>
+tr:hover {
+	background-color: lightgray;
 }
- </style>
+
+html, body {
+	height: 100%;
+	margin: 0;
+	overflow:hidden
+}
+
+.wrapper {
+	min-height: 100%;
+	margin-bottom: -50px;
+}
+
+.footer, .push {
+	height: 50px;
+}
+
+.footer {
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	font-size: 12px;
+	color: darkslategray;
+	text-align: center;
+	align-self: center;
+	bottom: 10px;
+    position: absolute;
+}
+
+.footer ul {
+	margin-bottom: 2px
+}
+
+.footer li {
+	height: 10px;
+	list-style-type: none;
+	display: inline-block;
+	text-decoration: underline;
+	background-repeat: no-repeat;
+	background-position: center 30px;
+	padding-left: 3px;
+	padding-right: 3px;
+}
+
+.push {
+	height: 50px;
+}
+tr {
+text-align: center;
+}
+</style>
 </head>
-<body style="background:linear-gradient(to left, #2bb72929, #8DC26F);">
-<!--  body background="https://www.publicdomainpictures.net/pictures/70000/nahled/grass-texture-background-green.jpg"> -->
-	
-	<div class="col-md-4" style="padding-top: 30px">
-		<h1 th:inline="text" style="text-shadow: green; color:white;">Welcome [[${#httpServletRequest.remoteUser}]]..!!</h1>
+<body style="background: linear-gradient(to left, #2bb72929, #8DC26F);">
+	<!--  body background="https://www.publicdomainpictures.net/pictures/70000/nahled/grass-texture-background-green.jpg"> -->
+
+
+
+	<div class="container mw-100">
+		<div class="w-100">
+			<div class="w-50 float-left">
+				<h1 th:inline="text" style="text-shadow: green; color: white;">Welcome
+					[[${#httpServletRequest.remoteUser}]]..!!</h1>
+			</div>
+			<div class="w-50 float-right">
+				<form th:action="@{/logout}" method="post"
+					style="text-align: right; padding-top: 10px; padding-right: 10px">
+					<input type="submit" value="Sign Out" class="btn btn-danger " />
+				</form>
+			</div>
+		</div>
+		<table class="table">
+			<thead class="thead-dark">
+				<tr>
+					<th>Name</th>
+					<th>Email</th>
+					<th>Department</th>
+					<th>Skills</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="student : ${students}">
+					<td th:text="${student.firstName} + ' ' + ${student.lastName}"></td>
+					<td th:text="${student.email}"></td>
+					<td th:text="${student.department}"></td>
+					<td><span th:each="course,iterStat : ${student.courses}">
+							<span th:text="${course.name}" /> <th:block
+								th:if="${!iterStat.last}">,</th:block>
+					</span></td>
+					<td><a th:href="@{/addEmployeeSkills/{id}(id=${student.id})}"
+						class="btn btn-success">Add Skills</a> <a
+						th:href="@{/edit/{id}(id=${student.id})}" class="btn btn-primary">Edit</a>
+						<a sec:authorize="hasAuthority('ADMIN')"
+						th:href="@{/delete/{id}(id=${student.id})}"
+						th:onclick="'javascript:confirmDelete(\'' + ${student.firstName} + ' ' + ${student.lastName} + '\');'"
+						class="btn btn-danger">Delete</a></td>
+				</tr>
+			</tbody>
+		</table>
+		<!-- <table class="table"
+			style="font-size: 18px; width: 100%; background: linear-gradient(to right, darkgray, gainsboro);">
+			<tr style="background: darkgreen; color: white;">
+				<th style="text-align: center;">Name</th>
+				<th style="text-align: center;">Email</th>
+				<th style="text-align: center;">Department</th>
+				<th style="text-align: center;">Skills</th>
+				<th style="text-align: center;">Actions</th>
+			</tr>
+			<tr th:each="student : ${students}" style="border: solid silver;">
+				<td th:text="${student.firstName} + ' ' + ${student.lastName}"
+					style="text-align: center;"></td>
+				<td th:text="${student.email}" style="text-align: center;"></td>
+				<td th:text="${student.department}" style="text-align: center;"></td>
+				<td style="text-align: center;"><span
+					th:each="course,iterStat : ${student.courses}"> <span
+						th:text="${course.name}" /> <th:block th:if="${!iterStat.last}">,</th:block>
+				</span></td>
+				<td style="text-align: center;"><a
+					th:href="@{/addEmployeeSkills/{id}(id=${student.id})}"
+					class="btn btn-success">Add Skills</a> <a
+					th:href="@{/edit/{id}(id=${student.id})}" class="btn btn-primary">Edit</a>
+					<a sec:authorize="hasAuthority('ADMIN')"
+					th:href="@{/delete/{id}(id=${student.id})}"
+					th:onclick="'javascript:confirmDelete(\'' + ${student.firstName} + ' ' + ${student.lastName} + '\');'"
+					class="btn btn-danger">Delete</a></td>
+			</tr>
+		</table> -->
+		<a href="/add" class="btn btn-primary">Add Employee</a>
+		<div class="push"></div>
 	</div>
-	
-		<form th:action="@{/logout}" method="post" style="text-align: right;padding-top: 10px;padding-right:10px ">
-			<input  type="submit" value="Sign Out" class="btn btn-danger "/>
-		</form>
-	
-    
-    <div style="width:100%">
-    
-    <table class="table" background="http://paper-backgrounds.com/textureimages/2012/04/gray-wall-textured-background-500x500.jpg" style=" font-size: 18px;width: 100%;" >
-		<tr style="background: darkgreen; color:white;" >
-		    <th style="text-align: center;">Name</th>
-		    <th  style="text-align: center;">Email</th>
-		    <th  style="text-align: center;">Department</th>
-		    <th  style="text-align: center;">Skills</th>
-		    <th  style="text-align: center;">Actions</th>
-		</tr>  
-    	<tr th:each = "student : ${students}" style="border: solid silver;">
-    		<td th:text="${student.firstName} + ' ' + ${student.lastName}"  style="text-align: center;"  ></td>
-    		<td th:text="${student.email}"  style="text-align: center;"></td>
-    		<td th:text="${student.department}" style="text-align: center;"></td>
-    		<td  style="text-align: center;">
-				<span th:each="course,iterStat : ${student.courses}">
-					<span th:text="${course.name}"/><th:block th:if="${!iterStat.last}">,</th:block>
-				</span>    		
-    		</td>
-    		<td  style="text-align: center;">
-    			<a th:href="@{/addEmployeeSkills/{id}(id=${student.id})}" class="btn btn-success">Add Skills</a>
-    			<a th:href="@{/edit/{id}(id=${student.id})}" class="btn btn-primary">Edit</a>
-    			<a sec:authorize="hasAuthority('ADMIN')" th:href="@{/delete/{id}(id=${student.id})}" class="btn btn-danger">Delete</a>
-    		</td>
-    	</tr>
-    </table>
-    <a href="/add" class="btn btn-primary btn-lg" >Add Employee</a>
-	</div>    
+	<footer id="footer" class="footer">
+		<ul>
+			<li><a href="#">Sitemap</a></li>
+			<li><a href="#">Investors</a></li>
+			<li><a href="#">Awards and Recognition</a></li>
+			<li><a href="#">Contact Us</a></li>
+			<li><a href="#">Privacy Policy</a></li>
+
+		</ul>
+
+		<ul>
+			<span>Get connected with us on social networks!</span>
+			<li></li>
+			<li><a href="#">Facebook</a></li>
+			<li><a href="#">Twitter</a></li>
+			<li><a href="#">LinkedIn</a></li>
+
+		</ul>
+
+		<p>© Copyright 2019. All Rights Reserved</p>
+
+	</footer>
+
+
+
+
 </body>
+
 </html>
