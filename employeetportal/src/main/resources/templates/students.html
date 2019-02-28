@@ -25,7 +25,16 @@ tr:hover {
 html, body {
 	height: 100%;
 	margin: 0;
-	overflow:hidden
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+}
+
+.container {
+	overflow-y: auto;
+	flex: 1 0 auto;
 }
 
 .wrapper {
@@ -33,20 +42,17 @@ html, body {
 	margin-bottom: -50px;
 }
 
-.footer, .push {
-	height: 50px;
-}
-
 .footer {
 	left: 0;
-	bottom: 0;
+	/* bottom: 0; */
 	width: 100%;
 	font-size: 12px;
 	color: darkslategray;
 	text-align: center;
 	align-self: center;
-	bottom: 10px;
-    position: absolute;
+	flex-shrink: 0;
+
+	/* position: absolute; */
 }
 
 .footer ul {
@@ -67,8 +73,9 @@ html, body {
 .push {
 	height: 50px;
 }
+
 tr {
-text-align: center;
+	text-align: center;
 }
 </style>
 </head>
@@ -85,7 +92,7 @@ text-align: center;
 			</div>
 			<div class="w-50 float-right">
 				<form th:action="@{/logout}" method="post"
-					style="text-align: right; padding-top: 10px; padding-right: 10px">
+					style="text-align: right; padding-top: 10px;">
 					<input type="submit" value="Sign Out" class="btn btn-danger " />
 				</form>
 			</div>
@@ -148,7 +155,7 @@ text-align: center;
 			</tr>
 		</table> -->
 		<a href="/add" class="btn btn-primary">Add Employee</a>
-		<div class="push"></div>
+
 	</div>
 	<footer id="footer" class="footer">
 		<ul>
