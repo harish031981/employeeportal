@@ -5,16 +5,18 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+
 @RunWith(SpringRunner.class)
 @DataJpaTest
-public class EmployeePortalApplicationTests {
+public class UserDetailServiceImplTests{
 
-
-	    
+	
     @Test
-    public void employeePortalTest() {
+    public void loadUserByUsernameTest() {
 
-    	System.out.println("employeePortalTest");
+    	System.out.println("loadUserByUsernameTest");
     }
    
+   
+    
 }
