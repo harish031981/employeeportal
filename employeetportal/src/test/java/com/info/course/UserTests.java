@@ -39,7 +39,7 @@ public class UserTests {
     
     @Test
     public void deleteUser() {
-    	User user = new User("testuser3", "testuser3", "USER3");
+    	User user = new User("testuser2", "testuser2", "USER2");
 
     	assertNull(user.getId());
     	userRepository.save(user);
