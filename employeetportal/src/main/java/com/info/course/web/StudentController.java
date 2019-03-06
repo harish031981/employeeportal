@@ -25,9 +25,10 @@ public class StudentController {
 	@Autowired
     private CourseRepository crepository; 		
 	
-	@RequestMapping("/login")
+	@RequestMapping(value={"/login", "/", ""})
 	public String login() {
     	return "login";
+    	
     }	
 	
 	@RequestMapping("/employee")
