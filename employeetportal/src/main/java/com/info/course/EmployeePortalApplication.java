@@ -36,24 +36,24 @@ public class EmployeePortalApplication {
 	public CommandLineRunner demo(StudentRepository repository, CourseRepository crepository, UserRepository urepository) {
 		return (args) -> {
 			// save students
-			Student student1 = new Student("John", "Johnson", "IT", "john.johnson@edureka.com"); 
-			Student student2 = new Student("Steve", "Stevens", "IT", "steve.stevent@edureka.com"); 
-			Student student3 = new Student("Mary", "Robinson", "IT", "mary.robinson@edureka.com"); 
-			Student student4 = new Student("Kate", "Keystone", "Admin","kate.keystone@edureka.com"); 
-			Student student5 = new Student("Diana", "Doll", "Business","diana.doll@edureka.com"); 
-			Student student6 = new Student("Victor", "Dvoryaninov", "IT","victor.dvoryaninov@edureka.com"); 
-			Student student7 = new Student("Dmitriy", "Korablev", "IT","dmitriy.korablev@edureka.com"); 
-			Student student8 = new Student("Andrey", "Kim", "IT","Andrey.kim@edureka.com"); 
+			Student student1 = new Student("John", "Johnson", "IT", "john.johnson@infobot.com"); 
+			Student student2 = new Student("Steve", "Stevens", "IT", "steve.stevent@infobot.com"); 
+			Student student3 = new Student("Mary", "Robinson", "IT", "mary.robinson@infobot.com"); 
+			Student student4 = new Student("Kate", "Keystone", "Admin","kate.keystone@infobot.com"); 
+			Student student5 = new Student("Diana", "Doll", "Business","diana.doll@infobot.com"); 
+			Student student6 = new Student("Victor", "Dvoryaninov", "IT","victor.dvoryaninov@infobot.com"); 
+			Student student7 = new Student("Dmitriy", "Korablev", "IT","dmitriy.korablev@infobot.com"); 
+			Student student8 = new Student("Andrey", "Kim", "IT","Andrey.kim@infobot.com"); 
 
 			
-			/*repository.save(new Student("Steve", "Stevens", "IT", "steve.stevent@edureka.com"));
-			repository.save(new Student("Mary", "Robinson", "IT", "mary@edureka.com"));
-			repository.save(new Student("Kate", "Keystone", "Admin","kate@edureka.com"));
-			repository.save(new Student("Diana", "Doll", "Business","diana@edureka.com"));
+			/*repository.save(new Student("Steve", "Stevens", "IT", "steve.stevent@infobot.com"));
+			repository.save(new Student("Mary", "Robinson", "IT", "mary@infobot.com"));
+			repository.save(new Student("Kate", "Keystone", "Admin","kate@infobot.com"));
+			repository.save(new Student("Diana", "Doll", "Business","diana@infobot.com"));
 			
-			repository.save(new Student("Victor", "Dvoryaninov", "IT","victor.dvoryaninov@edureka.com"));
-			repository.save(new Student("Dmitriy", "Korablev", "IT","dmitriy.korablev@edureka.com"));
-			repository.save(new Student("Andrey", "Kim", "IT","Andrey.kim@edureka.com"));
+			repository.save(new Student("Victor", "Dvoryaninov", "IT","victor.dvoryaninov@infobot.com"));
+			repository.save(new Student("Dmitriy", "Korablev", "IT","dmitriy.korablev@infobot.com"));
+			repository.save(new Student("Andrey", "Kim", "IT","Andrey.kim@infobot.com"));
 			*/
 			
 			Course course1 = new Course("Angular");

@@ -21,7 +21,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
-		<sonar.projectName>Edureka</sonar.projectName>
+		<sonar.projectName>InfoBot</sonar.projectName>
 		<sonar.projectVersion>local</sonar.projectVersion>
 		<sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
 		<jacoco.version>0.7.2.201409121644</jacoco.version>
